@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/produtos"
+        android:icon="@drawable/ic_trator"
+        android:title="@string/produtos"/>
+    <item
+        android:id="@+id/vejaMais"
+        android:icon="@drawable/ic_about"
+        android:title="@string/about"
+        />
+
+</menu>

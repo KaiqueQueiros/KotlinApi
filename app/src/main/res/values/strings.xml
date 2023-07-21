@@ -5,4 +5,36 @@
     <string name="about">Sobre</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_fundo">Image Fundo</string>
+    <string name="pesquisar">Pesquisar…</string>
+    <string name="ver_detalhes"><b>Ver detalhes</b></string>
+    <string name="nome_do_produto"><b>Nome do produto</b></string>
+    <string name="produto_mais_vendido">Produto mais vendido</string>
+    <string name="campo_verde">Campo verde</string>
+    <string name="descricao_do_produto">Descrição do produto</string>
+    <string name="cultura">Cultura</string>
+    <string name="cultura_do_produto">Cultura do produto</string>
+    <string name="rea_suportada">Área suportada</string>
+    <string name="area_suportada_do_produto">Area suportada do produto</string>
+    <string name="categoria">Categoria</string>
+    <string name="descricao_da_categoria_do_produto">Descricao da categoria do produto</string>
+    <string name="adicionar_ao_or_amento"><b>Adicionar ao Orçamento</b></string>
+    <string name="or_amento">Orçamento</string>
+    <string name="consulta_or_amento">Consulta Orçamento</string>
+    <string name="enviar_solicita_o">Enviar Solicitação</string>
+    <string name="digite_seu_e_mail">Digite seu e-mail</string>
+    <string name="about_trevo"><b>A Trevo é uma empresa inovadora que está revolucionando o setor agrícola com seus serviços de máquinas agrícolas de última geração.
+        Combinando tecnologia avançada, especialização agronômica e compromisso com a sustentabilidade, a Trevo está no centro da transformação da agricultura moderna.
+Acreditamos que a agricultura é a base de nossa sociedade e que seu futuro depende de práticas inteligentes, eficientes e ecologicamente sustentáveis.
+        Com essa visão em mente, desenvolvemos soluções sob medida para os agricultores enfrentarem os desafios do século XXI.</b></string>
+    <string name="nome_do_cliente">Nome do Cliente</string>
+    <string name="data_do_pedido">Data do pedido</string>
+    <string name="email_do_cliente">Email do Cliente</string>
+    <string name="nome">Nome: </string>
+    <string name="data_do_pedidos">Data do pedido:</string>
+    <string name="produtos_ids">Produtos Ids</string>
+    <string name="NomeCliente">Nome</string>
+    <string name="nome_do_cliente_orcamento">Nome</string>
+    <string name="e_mail">E-mail</string>
+    <string name="telefone">Telefone</string>
 </resources>

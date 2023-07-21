@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/produtos"
+        android:id="@+id/produtoProfile"
         android:icon="@drawable/ic_trator"
-        android:title="@string/produtos"/>
+        android:title="@string/produtos" />
     <item
-        android:id="@+id/vejaMais"
+        android:id="@+id/consultaOrcamento"
+        android:icon="@drawable/ic_orcamento"
+        android:title="@string/consulta_or_amento" />
+    <item
+        android:id="@+id/sobre"
         android:icon="@drawable/ic_about"
-        android:title="@string/about"
-        />
+        android:title="@string/about" />
+
 
 </menu>

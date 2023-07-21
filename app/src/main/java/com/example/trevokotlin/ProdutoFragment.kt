@@ -1,59 +1,88 @@
 package com.example.trevokotlin
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
+import com.example.trevokotlin.adapter.ListProductAdapter
+import com.example.trevokotlin.api.Produto
+import com.example.trevokotlin.api.ItemClickListener
+import com.example.trevokotlin.api.NetworkUtils
+import com.example.trevokotlin.api.ProductResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.Response
+import java.io.IOException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProdutoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProdutoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class ProdutoFragment : Fragment(), ItemClickListener {
+    private lateinit var products: List<Produto>
+    private lateinit var searchButton: ImageButton
+    private lateinit var pesquisar: EditText
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_produto, container, false)
+        val view = inflater.inflate(R.layout.fragment_produto, container, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycleView)
+        pesquisar = view.findViewById(R.id.pesquisar)
+        searchButton = view.findViewById(R.id.searchProduct)
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val retrofitClient: Call<ProductResponse> =
+                    NetworkUtils().productService.getProducts()
+                val response: Response<ProductResponse> = retrofitClient.execute()
+                if (response.isSuccessful) {
+                    val productResponse: ProductResponse? = response.body()
+                    products = productResponse?.content ?: emptyList()
+                    withContext(Dispatchers.Main) {
+                        val adapter = ListProductAdapter(requireContext(), products)
+                        adapter.setOnItemClickListener(this@ProdutoFragment)
+                        recyclerView.adapter = adapter
+                    }
+
+                    println("Requisição bem-sucedida")
+                } else {
+                    println("Resposta inválida: ${response.code()}")
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        searchButton.setOnClickListener {
+            val inputText = pesquisar.text.toString().trim()
+            if (inputText.isNotEmpty()) {
+                val productId = inputText.toIntOrNull()
+                if (productId != null) {
+                    DetailsProduct(productId)
+                } else {
+                    Toast.makeText(context, "Por favor, insira um ID de produto válido.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(context, "Por favor, insira um ID de produto.", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProdutoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProdutoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun clickItem(productId: Int) {
+        DetailsProduct(productId)
+        println("Cliquei no produto $productId")
+    }
+
+    private fun DetailsProduct(productId: Int) {
+        val intent = Intent(requireContext(), DetailsProductActivity::class.java)
+        intent.putExtra("productId", productId)
+        startActivity(intent)
     }
 }

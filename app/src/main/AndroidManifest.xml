@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,19 +12,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrevoKotlin"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity android:name=".model.Budget"
+            android:exported="false"/>
+        <activity
+            android:name=".model.AboutFragment"
+            android:exported="false" />
+        <activity
+            android:name=".DetailsProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".model.CartMain"
+            android:exported="false" />
+        <activity
+            android:name=".BudgetConsult"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:launchMode="singleTask">
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

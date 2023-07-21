@@ -3,15 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ProdutoFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/produtos"
-        android:layout_gravity="center"
-        android:textSize="20sp"
+        android:layout_height="match_parent">
 
-        />
+        <ImageView
+            android:id="@+id/imageFundo"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:contentDescription="@string/campo_verde"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/campoverde"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+
+        <EditText
+            android:id="@+id/pesquisar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/edittext_border"
+            app:layout_constraintBottom_toTopOf="@id/recycleView"
+            android:hint="@string/pesquisar"
+            android:layout_marginBottom="40dp"
+            android:paddingHorizontal= "20dp" />
+
+        <ImageButton
+            android:id="@+id/searchProduct"
+            android:layout_width="40dp"
+            android:layout_height="43dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edittext_border"
+            android:src="@drawable/ic_search"
+            app:layout_constraintEnd_toEndOf="@id/pesquisar"
+            app:layout_constraintHorizontal_bias="0.945"
+            app:layout_constraintStart_toStartOf="@id/pesquisar"
+            app:layout_constraintTop_toTopOf="@id/pesquisar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp"
+            android:translationY="-25dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/imageFundo"
+            tools:listitem="@layout/preview_products" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

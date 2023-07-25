@@ -12,7 +12,7 @@ import com.example.trevokotlin.R
 import com.example.trevokotlin.api.Orcamento
 
 
-class OrcamentoAdapter(private val context: Context, private val orcamentos: List<Orcamento>) :
+class OrcamentoAdapter(private val orcamentos: List<Orcamento>) :
     RecyclerView.Adapter<OrcamentoAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -21,12 +21,12 @@ class OrcamentoAdapter(private val context: Context, private val orcamentos: Lis
             val dataOrcamento = itemView.findViewById<Button>(R.id.dataPedido)
             val nomeCliente = itemView.findViewById<TextView>(R.id.nomeCliente)
             val emailCliente = itemView.findViewById<TextView>(R.id.emailDoClient)
-            val produtosList = budget.produtos?.map { it.toInt() }
-            val produtosInt = produtosList?.joinToString(", ")
+            val produtosList = budget.produtos.map { it }
+            val produtosInt = produtosList.joinToString(", ")
             produtos.text = produtosInt
             nomeCliente.text = budget.cliente.nome
             emailCliente.text = budget.cliente.email
-            val dataIntList = budget.data?.map { it.toInt() }
+            val dataIntList = budget.data?.map { it }
             val dataString = dataIntList?.joinToString(", ")
             dataOrcamento.text = dataString
 
@@ -44,8 +44,6 @@ class OrcamentoAdapter(private val context: Context, private val orcamentos: Lis
         holder.loadBudget(budget)
 
     }
-
-
 
     override fun getItemCount(): Int {
         return orcamentos.size

@@ -1,36 +1,25 @@
-package com.example.trevokotlin.model
+package com.example.trevokotlin
 
 import android.content.Context
 import android.content.Intent
 import com.example.trevokotlin.adapter.CartAdapter
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.trevokotlin.R
-import com.example.trevokotlin.adapter.ListProductAdapter
-import com.example.trevokotlin.api.ItemClickListener
 import com.example.trevokotlin.api.Produto
 import com.example.trevokotlin.api.NetworkUtils
-import com.example.trevokotlin.api.ProductResponse
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Response
 import java.io.IOException
 
-class CartMain : AppCompatActivity() {
+class CartActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var productIds: List<Int>
     private lateinit var products: MutableList<Produto>
@@ -46,7 +35,7 @@ class CartMain : AppCompatActivity() {
         getProductDetails()
         val buttonOrcamento = findViewById<AppCompatButton>(R.id.enviarSolicitacao)
         buttonOrcamento.setOnClickListener {
-            val intent = Intent(this, Budget::class.java)
+            val intent = Intent(this, BudgetActivity::class.java)
             startActivity(intent)
         }
     }
@@ -77,7 +66,7 @@ class CartMain : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 val adapter = CartAdapter(products)
                 recyclerView.adapter = adapter
-                recyclerView.layoutManager = LinearLayoutManager(this@CartMain)
+                recyclerView.layoutManager = LinearLayoutManager(this@CartActivity)
             }
         }
     }

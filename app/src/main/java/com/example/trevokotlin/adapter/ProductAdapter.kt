@@ -17,8 +17,8 @@ import com.example.trevokotlin.api.Produto
 import com.example.trevokotlin.DetailsProductActivity
 import com.example.trevokotlin.api.ItemClickListener
 
-class ListProductAdapter(private val context: Context, private val products: List<Produto>) :
-    RecyclerView.Adapter<ListProductAdapter.ViewHolder>() {
+class ProductAdapter(private val context: Context, private val products: List<Produto>) :
+    RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private var itemClickListener: ItemClickListener? = null
     fun setOnItemClickListener(listener: ItemClickListener) {

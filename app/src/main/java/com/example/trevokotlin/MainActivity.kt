@@ -9,12 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.example.trevokotlin.model.CartMain
-import com.example.trevokotlin.model.CartViewModel
 import com.google.android.material.navigation.NavigationView
 
 
@@ -38,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         val imageBag = findViewById<ImageView>(R.id.imageBag)
         imageBag.setOnClickListener {
-            val intent = Intent(this, CartMain::class.java)
+            val intent = Intent(this, CartActivity::class.java)
             startActivity(intent)
         }
 

@@ -1,4 +1,4 @@
-package com.example.trevokotlin.model
+package com.example.trevokotlin
 
 import android.os.Bundle
 import android.view.LayoutInflater

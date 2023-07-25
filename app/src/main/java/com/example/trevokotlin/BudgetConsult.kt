@@ -73,7 +73,7 @@ class BudgetConsult : AppCompatActivity() {
     private fun processBudget(budgets: List<Orcamento>) {
         val orcamentosRecyclerView = findViewById<RecyclerView>(R.id.recycleViewOrcamento)
         orcamentosRecyclerView.layoutManager = LinearLayoutManager(this)
-        val orcamentosAdapter = OrcamentoAdapter(this@BudgetConsult, budgets)
+        val orcamentosAdapter = OrcamentoAdapter(budgets)
         orcamentosRecyclerView.adapter = orcamentosAdapter
     }
 }

@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class NetworkUtils {
-    var getRetrofitInstance = Retrofit.Builder()
+    var getRetrofitInstance: Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl("http://10.0.0.113:8080/trevo/")
         .build()

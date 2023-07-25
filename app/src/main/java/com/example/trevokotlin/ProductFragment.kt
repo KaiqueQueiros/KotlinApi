@@ -11,7 +11,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trevokotlin.adapter.ListProductAdapter
+import com.example.trevokotlin.adapter.ProductAdapter
 import com.example.trevokotlin.api.Produto
 import com.example.trevokotlin.api.ItemClickListener
 import com.example.trevokotlin.api.NetworkUtils
@@ -24,7 +24,7 @@ import retrofit2.Response
 import java.io.IOException
 
 
-class ProdutoFragment : Fragment(), ItemClickListener {
+class ProductFragment : Fragment(), ItemClickListener {
     private lateinit var products: List<Produto>
     private lateinit var searchButton: ImageButton
     private lateinit var pesquisar: EditText
@@ -45,8 +45,8 @@ class ProdutoFragment : Fragment(), ItemClickListener {
                     val productResponse: ProductResponse? = response.body()
                     products = productResponse?.content ?: emptyList()
                     withContext(Dispatchers.Main) {
-                        val adapter = ListProductAdapter(requireContext(), products)
-                        adapter.setOnItemClickListener(this@ProdutoFragment)
+                        val adapter = ProductAdapter(requireContext(), products)
+                        adapter.setOnItemClickListener(this@ProductFragment)
                         recyclerView.adapter = adapter
                     }
 

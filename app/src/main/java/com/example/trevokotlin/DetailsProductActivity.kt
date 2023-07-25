@@ -1,7 +1,6 @@
 package com.example.trevokotlin
 
 import android.content.Context
-import com.example.trevokotlin.model.CartViewModel
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.trevokotlin.api.Produto
 import com.example.trevokotlin.api.NetworkUtils
@@ -33,7 +31,6 @@ class DetailsProductActivity : AppCompatActivity() {
         val addToCartButton = findViewById<Button>(R.id.buttonOrcamentoFromDetails)
         addToCartButton.setOnClickListener {
             val sharedPreferences = getSharedPreferences("lista_de_produtos", Context.MODE_PRIVATE)
-
             val productListString = sharedPreferences.getString("productList", "")
             val productList = productListString?.split(",")?.mapNotNull { it.toIntOrNull() }?.toMutableList() ?: mutableListOf()
             productList.add(productId)

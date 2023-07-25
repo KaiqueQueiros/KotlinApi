@@ -6,25 +6,31 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
 import com.example.trevokotlin.R
-import com.example.trevokotlin.api.ItemClickListener
 import com.example.trevokotlin.api.Produto
+import androidx.appcompat.app.AlertDialog
 
-class CartAdapter(private val products: List<Produto>)
-    : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
-    private var productList: List<Produto> = emptyList()
+
+class CartAdapter(private val products: List<Produto>) :
+    RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        @SuppressLint("NotifyDataSetChanged")
         fun bind(product: Produto) {
             val nameProduct = itemView.findViewById<TextView>(R.id.nomeProdutoCart)
-            val img = itemView.findViewById<ImageView>(R.id.imageProductCart)
-            val lixeira = itemView.findViewById<Button>(R.id.detailsProductButton)
+            val img = itemView.findViewById<ImageView>(R.id.imageCarrinho)
+            val lixeira = itemView.findViewById<ImageButton>(R.id.lixeira)
+
+            lixeira.setOnClickListener {
+                showDeleteConfirmationDialog(product)
+            }
+
             nameProduct.text = product.nome
             try {
                 Glide.with(itemView.context)
@@ -34,7 +40,43 @@ class CartAdapter(private val products: List<Produto>)
                 Log.d("TAG", e.toString())
             }
         }
+
+        private fun showDeleteConfirmationDialog(product: Produto) {
+            val alertDialog = AlertDialog.Builder(itemView.context)
+                .setTitle("Excluir Produto")
+                .setMessage("Deseja realmente excluir o produto ${product.nome}?")
+                .setPositiveButton("Sim") { dialog, _ ->
+                    removeProduct(product)
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Não") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+
+            alertDialog.show()
+        }
+
+
+        @SuppressLint("NotifyDataSetChanged")
+        private fun removeProduct(product: Produto) {
+            val sharedPreferences = itemView.context.getSharedPreferences("lista_de_produtos", Context.MODE_PRIVATE)
+            val productListString = sharedPreferences.getString("productList", "")
+            val productList = productListString?.split(",")?.mapNotNull { it.toIntOrNull() }?.toMutableList() ?: mutableListOf()
+
+            productList.remove(product.idProduto)
+
+            val editor = sharedPreferences.edit()
+            val updatedProductListString = productList.joinToString(",")
+            editor.putString("productList", updatedProductListString)
+            editor.apply()
+
+            products.toMutableList().remove(product)
+            notifyDataSetChanged()
+        }
+
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
@@ -52,10 +94,5 @@ class CartAdapter(private val products: List<Produto>)
         return products.size
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setProducts(products: List<Produto>) {
-        productList = products
-        notifyDataSetChanged()
-        println("Products list: $productList")
-    }
 }
+

@@ -6,7 +6,7 @@
     app:startDestination="@id/produtoProfile">
     <fragment
         android:id="@+id/produtoProfile"
-        android:name="com.example.trevokotlin.ProdutoFragment"
+        android:name="com.example.trevokotlin.ProductFragment"
         android:label="fragment_produto"
         tools:layout="@layout/fragment_produto" />
 
@@ -17,7 +17,7 @@
         tools:layout="@layout/consulta_orcamento" />
     <fragment
         android:id="@+id/sobre"
-        android:name="com.example.trevokotlin.model.AboutFragment"
+        android:name="com.example.trevokotlin.AboutFragment"
         android:label="about"
         tools:layout="@layout/about_trevo"/>
 

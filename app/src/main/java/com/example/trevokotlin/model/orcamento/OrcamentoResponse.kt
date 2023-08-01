@@ -1,8 +1,8 @@
-package com.example.trevokotlin.api
+package com.example.trevokotlin.model.orcamento
 
 import com.google.gson.annotations.SerializedName
 
-data class BudgetResponse(
+data class OrcamentoResponse(
     @SerializedName("content")
     val budgets: List<Orcamento>
 

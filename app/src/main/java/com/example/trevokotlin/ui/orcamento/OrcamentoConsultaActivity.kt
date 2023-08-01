@@ -1,4 +1,4 @@
-package com.example.trevokotlin
+package com.example.trevokotlin.ui.orcamento
 
 import com.example.trevokotlin.adapter.OrcamentoAdapter
 import android.annotation.SuppressLint
@@ -11,17 +11,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trevokotlin.api.Orcamento
-import com.example.trevokotlin.api.Produto
-import com.example.trevokotlin.api.NetworkUtils
+import com.example.trevokotlin.R
+import com.example.trevokotlin.model.orcamento.Orcamento
+import com.example.trevokotlin.config.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 
-class BudgetConsult : AppCompatActivity() {
-    private lateinit var products: List<Produto>
+class OrcamentoConsultaActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var searchButton: ImageButton
 
@@ -59,13 +58,14 @@ class BudgetConsult : AppCompatActivity() {
                         processBudget(budgets)
                     } else {
                         Log.e(
-                            "MainActivity",
-                            "Failed to get budgets. Response code: ${response.code()}"
+                            "OrcamentoConsultaActivity",
+                            "Falha ao encontrar orçamentos. Response code: ${response.code()}"
+
                         )
                     }
                 }
             } catch (e: IOException) {
-                Log.e("MainActivity", "Error: ${e.message}")
+                Log.e("OrcamentoConsultaActivity", "Error: ${e.message}")
             }
         }
     }

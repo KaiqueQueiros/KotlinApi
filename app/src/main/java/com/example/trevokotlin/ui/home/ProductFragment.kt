@@ -1,4 +1,4 @@
-package com.example.trevokotlin
+package com.example.trevokotlin.ui.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,11 +11,12 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trevokotlin.R
 import com.example.trevokotlin.adapter.ProductAdapter
-import com.example.trevokotlin.api.Produto
-import com.example.trevokotlin.api.ItemClickListener
-import com.example.trevokotlin.api.NetworkUtils
-import com.example.trevokotlin.api.ProductResponse
+import com.example.trevokotlin.model.produto.Produto
+import com.example.trevokotlin.model.produto.ItemClickListenerProduct
+import com.example.trevokotlin.config.NetworkUtils
+import com.example.trevokotlin.model.produto.ProdutoResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,7 +25,7 @@ import retrofit2.Response
 import java.io.IOException
 
 
-class ProductFragment : Fragment(), ItemClickListener {
+class ProductFragment : Fragment(), ItemClickListenerProduct {
     private lateinit var products: List<Produto>
     private lateinit var searchButton: ImageButton
     private lateinit var pesquisar: EditText
@@ -38,12 +39,12 @@ class ProductFragment : Fragment(), ItemClickListener {
         searchButton = view.findViewById(R.id.searchProduct)
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val retrofitClient: Call<ProductResponse> =
+                val retrofitClient: Call<ProdutoResponse> =
                     NetworkUtils().productService.getProducts()
-                val response: Response<ProductResponse> = retrofitClient.execute()
+                val response: Response<ProdutoResponse> = retrofitClient.execute()
                 if (response.isSuccessful) {
-                    val productResponse: ProductResponse? = response.body()
-                    products = productResponse?.content ?: emptyList()
+                    val produtoResponse: ProdutoResponse? = response.body()
+                    products = produtoResponse?.content ?: emptyList()
                     withContext(Dispatchers.Main) {
                         val adapter = ProductAdapter(requireContext(), products)
                         adapter.setOnItemClickListener(this@ProductFragment)

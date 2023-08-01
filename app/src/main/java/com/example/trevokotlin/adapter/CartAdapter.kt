@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
 import com.example.trevokotlin.R
-import com.example.trevokotlin.api.Produto
+import com.example.trevokotlin.model.produto.Produto
 import androidx.appcompat.app.AlertDialog
 
 
@@ -63,14 +63,11 @@ class CartAdapter(private val products: List<Produto>) :
             val sharedPreferences = itemView.context.getSharedPreferences("lista_de_produtos", Context.MODE_PRIVATE)
             val productListString = sharedPreferences.getString("productList", "")
             val productList = productListString?.split(",")?.mapNotNull { it.toIntOrNull() }?.toMutableList() ?: mutableListOf()
-
             productList.remove(product.idProduto)
-
             val editor = sharedPreferences.edit()
             val updatedProductListString = productList.joinToString(",")
             editor.putString("productList", updatedProductListString)
             editor.apply()
-
             products.toMutableList().remove(product)
             notifyDataSetChanged()
         }

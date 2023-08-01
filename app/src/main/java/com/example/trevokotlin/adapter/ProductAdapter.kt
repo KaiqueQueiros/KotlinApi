@@ -13,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
 import com.example.trevokotlin.R
-import com.example.trevokotlin.api.Produto
-import com.example.trevokotlin.DetailsProductActivity
-import com.example.trevokotlin.api.ItemClickListener
+import com.example.trevokotlin.model.produto.Produto
+import com.example.trevokotlin.ui.home.DetailsProductActivity
+import com.example.trevokotlin.model.produto.ItemClickListenerProduct
 
 class ProductAdapter(private val context: Context, private val products: List<Produto>) :
     RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-    private var itemClickListener: ItemClickListener? = null
-    fun setOnItemClickListener(listener: ItemClickListener) {
-        itemClickListener = listener
+    private var itemClickListenerProduct: ItemClickListenerProduct? = null
+    fun setOnItemClickListener(listener: ItemClickListenerProduct) {
+        itemClickListenerProduct = listener
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -56,7 +56,7 @@ class ProductAdapter(private val context: Context, private val products: List<Pr
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(context)
-        val view = inflater.inflate(R.layout.preview_products, parent, false)
+        val view = inflater.inflate(R.layout.view_preview_products, parent, false)
         return ViewHolder(view)
     }
 

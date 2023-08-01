@@ -16,8 +16,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintAbout"
-        android:layout_width="415dp"
-        android:layout_height="536dp"
+        android:layout_width="match_parent"
+        android:layout_height="636dp"
         android:background="@color/primary"
         app:layout_constraintTop_toBottomOf="@id/logo"
         tools:ignore="MissingConstraints"
@@ -25,15 +25,14 @@
 
         <TextView
             android:id="@+id/aboutTrevo"
-            android:layout_width="392dp"
-            android:layout_height="392dp"
+            android:layout_width="391dp"
+            android:layout_height="419dp"
             android:text="@string/about_trevo"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="11dp"
-
-            tools:layout_editor_absoluteY="33dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

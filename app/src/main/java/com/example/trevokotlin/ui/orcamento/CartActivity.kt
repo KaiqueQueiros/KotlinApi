@@ -1,4 +1,4 @@
-package com.example.trevokotlin
+package com.example.trevokotlin.ui.orcamento
 
 import android.content.Context
 import android.content.Intent
@@ -10,8 +10,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.trevokotlin.api.Produto
-import com.example.trevokotlin.api.NetworkUtils
+import com.example.trevokotlin.R
+import com.example.trevokotlin.model.produto.Produto
+import com.example.trevokotlin.config.NetworkUtils
+import com.example.trevokotlin.ui.proposta.BudgetActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,13 +27,12 @@ class CartActivity : AppCompatActivity() {
     private lateinit var products: MutableList<Produto>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.orcamento_main)
+        setContentView(R.layout.orcamento_actvity_main)
         recyclerView = findViewById(R.id.recycleViewBudget)
         products = mutableListOf()
         val sharedPreferences = getSharedPreferences("lista_de_produtos", Context.MODE_PRIVATE)
-        val productListString = sharedPreferences.getString("productList", "")
-        productIds = productListString?.split(",")?.mapNotNull { it.toIntOrNull() } ?: emptyList()
-        println(productIds)
+        val productListIds = sharedPreferences.getString("productList", "")
+        productIds = productListIds?.split(",")?.mapNotNull { it.toIntOrNull() } ?: emptyList()
         getProductDetails()
         val buttonOrcamento = findViewById<AppCompatButton>(R.id.enviarSolicitacao)
         buttonOrcamento.setOnClickListener {
@@ -45,8 +46,7 @@ class CartActivity : AppCompatActivity() {
             val productList = mutableListOf<Produto>()
             for (productId in productIds) {
                 try {
-                    val retrofitClient: Call<Produto> =
-                        NetworkUtils().productService.getProductById(productId)
+                    val retrofitClient: Call<Produto> = NetworkUtils().productService.getProductById(productId)
                     val response: Response<Produto> = retrofitClient.execute()
                     if (response.isSuccessful) {
                         val produto: Produto? = response.body()
@@ -74,7 +74,5 @@ class CartActivity : AppCompatActivity() {
     fun BackPage(view: View) {
         onBackPressed()
     }
-
-
 }
 

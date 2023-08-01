@@ -1,4 +1,4 @@
-package com.example.trevokotlin.api
+package com.example.trevokotlin.model.produto
 
 import java.io.Serializable
 

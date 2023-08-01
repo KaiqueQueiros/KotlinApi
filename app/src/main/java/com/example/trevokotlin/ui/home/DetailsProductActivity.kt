@@ -1,4 +1,4 @@
-package com.example.trevokotlin
+package com.example.trevokotlin.ui.home
 
 import android.content.Context
 import android.os.Bundle
@@ -10,8 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.trevokotlin.api.Produto
-import com.example.trevokotlin.api.NetworkUtils
+import com.example.trevokotlin.R
+import com.example.trevokotlin.model.produto.Produto
+import com.example.trevokotlin.config.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ import retrofit2.Response
 class DetailsProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.details_product)
+        setContentView(R.layout.activity_details_product)
         val productId = intent.getIntExtra("productId", 1)
         CoroutineScope(Dispatchers.Main).launch {
             getProductById(productId)

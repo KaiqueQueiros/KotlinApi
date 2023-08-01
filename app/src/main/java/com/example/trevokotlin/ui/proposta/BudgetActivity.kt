@@ -1,4 +1,4 @@
-package com.example.trevokotlin
+package com.example.trevokotlin.ui.proposta
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import com.example.trevokotlin.api.NetworkUtils
+import com.example.trevokotlin.MainActivity
+import com.example.trevokotlin.R
+import com.example.trevokotlin.config.NetworkUtils
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -21,11 +23,10 @@ class BudgetActivity : AppCompatActivity() {
     private lateinit var enviaSolicitacao: AppCompatButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.formulario_cliente)
+        setContentView(R.layout.fragment_formulario_cliente)
         val sharedPreferences = getSharedPreferences("lista_de_produtos", Context.MODE_PRIVATE)
         val productListString = sharedPreferences.getString("productList", "")
-        val productIds =
-            productListString?.split(",")?.mapNotNull { it.toIntOrNull() } ?: emptyList()
+        val productIds = productListString?.split(",")?.mapNotNull { it.toIntOrNull() } ?: emptyList()
         enviaSolicitacao = findViewById(R.id.enviarSolicitacaoButton)
         enviaSolicitacao.setOnClickListener {
             nomeCliente = findViewById(R.id.nome)
@@ -53,11 +54,11 @@ class BudgetActivity : AppCompatActivity() {
                         val editor = sharedPreferences.edit()
                         editor.remove("productList")
                         editor.apply()
-                        val intent = Intent(this@BudgetActivity, ProductFragment::class.java)
+                        val intent = Intent(this@BudgetActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+                        Toast.makeText(this@BudgetActivity, "Solicitação enviada com sucesso ", Toast.LENGTH_SHORT).show()
                     } else {
-                        println(jsonDadosOrcamento)
                         Toast.makeText(this@BudgetActivity, "Erro na solicitação a api", Toast.LENGTH_SHORT).show()
                     }
                 }

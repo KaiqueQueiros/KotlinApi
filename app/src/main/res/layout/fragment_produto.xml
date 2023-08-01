@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ProductFragment">
+    tools:context=".ui.home.ProductFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint"
@@ -57,7 +57,7 @@
             android:translationY="-25dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/imageFundo"
-            tools:listitem="@layout/preview_products" />
+            tools:listitem="@layout/view_preview_products" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

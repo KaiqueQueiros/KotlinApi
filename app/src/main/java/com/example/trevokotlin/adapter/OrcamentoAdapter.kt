@@ -1,7 +1,5 @@
 package com.example.trevokotlin.adapter
 
-import android.content.Context
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trevokotlin.R
-import com.example.trevokotlin.api.Orcamento
+import com.example.trevokotlin.model.orcamento.Orcamento
 
 
 class OrcamentoAdapter(private val orcamentos: List<Orcamento>) :
@@ -35,7 +33,7 @@ class OrcamentoAdapter(private val orcamentos: List<Orcamento>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.preview_orcamento, parent, false)
+            .inflate(R.layout.view_preview_orcamento, parent, false)
         return ViewHolder(itemView)
     }
 

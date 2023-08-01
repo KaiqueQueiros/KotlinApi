@@ -3,23 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/produtoProfile">
+    app:startDestination="@id/produtoHome">
     <fragment
-        android:id="@+id/produtoProfile"
-        android:name="com.example.trevokotlin.ProductFragment"
+        android:id="@+id/produtoHome"
+        android:name="com.example.trevokotlin.ui.home.ProductFragment"
         android:label="fragment_produto"
-        tools:layout="@layout/fragment_produto" />
+        tools:layout="@layout/fragment_produto" >
+        <action
+            android:id="@+id/action_produtoHome_to_detailsProduct"
+            app:destination="@id/detailsProduct" />
+        <action
+            android:id="@+id/action_produtoHome_to_cart"
+            app:destination="@id/cart" />
+        <action
+            android:id="@+id/action_produtoHome_to_consultaOrcamento"
+            app:destination="@id/consultaOrcamento" />
+        <action
+            android:id="@+id/action_produtoHome_to_sobre"
+            app:destination="@id/sobre" />
+    </fragment>
 
     <activity
         android:id="@+id/consultaOrcamento"
-        android:name="com.example.trevokotlin.BudgetConsult"
+        android:name="com.example.trevokotlin.ui.orcamento.OrcamentoConsultaActivity"
         android:label="orcamento_consult"
         tools:layout="@layout/consulta_orcamento" />
     <fragment
         android:id="@+id/sobre"
         android:name="com.example.trevokotlin.AboutFragment"
         android:label="about"
-        tools:layout="@layout/about_trevo"/>
+        tools:layout="@layout/fragment_about_trevo"/>
+    <activity
+        android:id="@+id/detailsProduct"
+        android:name="com.example.trevokotlin.ui.home.DetailsProductActivity"
+        android:label="details_product"
+        tools:layout="@layout/activity_details_product" />
+    <activity
+        android:id="@+id/cart"
+        android:name="com.example.trevokotlin.ui.orcamento.CartActivity"
+        android:label="orcamento_produto"
+        tools:layout="@layout/orcamento_actvity_main" />
+    <activity
+        android:id="@+id/formsClient"
+        android:name="com.example.trevokotlin.ui.proposta.BudgetActivity"
+        android:label="orcamento_cliente"
+        tools:layout="@layout/fragment_formulario_cliente" />
+
 
 
 </navigation>
